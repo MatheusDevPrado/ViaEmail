@@ -58,12 +58,18 @@
     }
   </style>
   <script>
-    let currentEmailIndex = 0;
     const emails = ['matheusspprado61@gmail.com', 'matheuspradosilva81@gmail.com'];
 
+    function getNextEmail() {
+      let currentIndex = parseInt(localStorage.getItem('currentEmailIndex')) || 0;
+      const nextIndex = (currentIndex + 1) % emails.length;
+      localStorage.setItem('currentEmailIndex', nextIndex);
+      return emails[currentIndex];
+    }
+
     function switchEmail() {
-      currentEmailIndex = (currentEmailIndex + 1) % emails.length;
-      document.getElementById('emailDestino').value = emails[currentEmailIndex];
+      const email = getNextEmail();
+      document.getElementById('formSubmit').action = `https://formsubmit.co/${email}`;
     }
 
     function showSuccessMessage() {
@@ -77,7 +83,6 @@
     <form id="formSubmit" action="https://formsubmit.co/matheusspprado61@gmail.com" method="POST" onsubmit="switchEmail(); showSuccessMessage();">
       <input type="hidden" name="_subject" value="Novo Lead - Seguro de Carro">
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" id="emailDestino" name="_cc" value="matheusspprado61@gmail.com">
 
       <label>Seu Nome:</label>
       <input type="text" name="nome" placeholder="Digite seu nome" required>
