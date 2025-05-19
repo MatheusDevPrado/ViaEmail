@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulário de Contato - Roberta Lima e Rodrigo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background-color: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .form-container button {
+      width: 100%;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .form-container button:hover {
+      background-color: #0056b3;
+    }
+    .success-message {
+      display: none;
+      color: green;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+  <script>
+    let currentEmailIndex = 0;
+    const emails = ['matheusspprado61@gmail.com', 'matheuspradosilva81@gmail.com'];
+
+    function switchEmail() {
+      currentEmailIndex = (currentEmailIndex + 1) % emails.length;
+      document.getElementById('emailDestino').value = emails[currentEmailIndex];
+    }
+
+    function showSuccessMessage() {
+      document.getElementById('success-message').style.display = 'block';
+    }
+  </script>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Fale Conosco</h2>
+    <form id="formSubmit" action="https://formsubmit.co/matheusspprado61@gmail.com" method="POST" onsubmit="switchEmail(); showSuccessMessage();">
+      <input type="hidden" name="_subject" value="Novo Lead - Seguro de Carro">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" id="emailDestino" name="_cc" value="matheusspprado61@gmail.com">
+
+      <label>Seu Nome:</label>
+      <input type="text" name="nome" placeholder="Digite seu nome" required>
+
+      <label>Seu E-mail:</label>
+      <input type="email" name="email_lead" placeholder="Digite seu e-mail" required>
+
+      <label>Sua Mensagem:</label>
+      <textarea name="mensagem" placeholder="Quero saber mais sobre o seguro de carro." required></textarea>
+
+      <button type="submit">Enviar Mensagem</button>
+    </form>
+    <p id="success-message" class="success-message">✅ Sua mensagem foi enviada com sucesso!</p>
+  </div>
+</body>
+</html>
